@@ -7,7 +7,5 @@ import br.com.doublelogic.sportschallengebackend.campaignservice.persistance.ent
 
 @Repository
 public interface CampaignRepository extends JpaRepository<Campaign, Long> {
-
-	
 	
 }
