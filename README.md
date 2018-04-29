@@ -1,5 +1,13 @@
 # sports-challenge-backend
 
+Este é um repositório para um teste relasido para o Grupo Netshoes.
+
+Ele é composto por dois serviços:
+
+* campaign-service
+* fan-service
+
+
 ## Deadlock
 
 Uma resposta bem simplificada seria que é um problema que ocorre quando um processo A precisa acessar um recurso, mas não é possível porque o processo B está utilizando. E o processo B precisa acessar um recurso, mas não é possível porque o processo A está utilizando. Assim ambos os processos A e B ficam aguardando a liberação de acesso os recursos, mas isso nunca irá ocorrer porque ambos os processos estão impedindo o término de suas execuções.
