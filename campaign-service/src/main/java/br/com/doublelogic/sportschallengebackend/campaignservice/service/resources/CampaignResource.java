@@ -18,12 +18,16 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import br.com.doublelogic.sportschallengebackend.campaignservice.persistance.entities.Campaign;
 import br.com.doublelogic.sportschallengebackend.campaignservice.persistance.repositories.CampaignRepository;
 import br.com.doublelogic.sportschallengebackend.campaignservice.service.errors.CampaignNotFoundException;
+import br.com.doublelogic.sportschallengebackend.campaignservice.service.message.MessageSender;
 
 @RestController
 public class CampaignResource {
 
 	@Autowired
 	private CampaignRepository campaignRepository;
+	
+	@Autowired
+	private MessageSender messageSender;
 	
 	@GetMapping("/campaigns")
 	public List<Campaign> retrieveAllCampaigns() {
@@ -36,7 +40,9 @@ public class CampaignResource {
 
 		if (!campaign.isPresent())
 			throw new CampaignNotFoundException("id-" + id);
-
+		
+		messageSender.sendMessage();
+		
 		return campaign.get();
 	}
 	
