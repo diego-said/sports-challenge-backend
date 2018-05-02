@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import br.com.doublelogic.sportschallengebackend.campaignservice.business.CampaignManager;
 import br.com.doublelogic.sportschallengebackend.campaignservice.persistance.entities.Campaign;
 import br.com.doublelogic.sportschallengebackend.campaignservice.persistance.repositories.CampaignRepository;
 import br.com.doublelogic.sportschallengebackend.campaignservice.service.errors.CampaignNotFoundException;
+import br.com.doublelogic.sportschallengebackend.campaignservice.service.message.Message;
 import br.com.doublelogic.sportschallengebackend.campaignservice.service.message.MessageSender;
 
 @RestController
@@ -29,9 +31,17 @@ public class CampaignResource {
 	@Autowired
 	private MessageSender messageSender;
 	
+	@Autowired
+	private CampaignManager campaignManager;
+	
 	@GetMapping("/campaigns")
 	public List<Campaign> retrieveAllCampaigns() {
-		return campaignRepository.findAll();
+		return campaignRepository.findAllValid();
+	}
+	
+	@GetMapping("/campaigns/team/{id}")
+	public List<Campaign> retrieveAllTeamCampaigns(@PathVariable long id) {
+		return campaignRepository.findByIdTeam(id);
 	}
 	
 	@GetMapping("/campaigns/{id}")
@@ -40,8 +50,6 @@ public class CampaignResource {
 
 		if (!campaign.isPresent())
 			throw new CampaignNotFoundException("id-" + id);
-		
-		messageSender.sendMessage();
 		
 		return campaign.get();
 	}
@@ -54,11 +62,13 @@ public class CampaignResource {
 			throw new CampaignNotFoundException("id-" + id);
 		
 		campaignRepository.deleteById(id);
+		
+		messageSender.sendMessage(Message.Factory.createDeleteMessage(campaign.get()));
 	}
 	
 	@PostMapping("/campaigns")
 	public ResponseEntity<Object> createCampaign(@RequestBody Campaign campaign) {
-		Campaign savedCampaign = campaignRepository.save(campaign);
+		Campaign savedCampaign = campaignManager.adjustAndSave(campaign);
 
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(savedCampaign.getId()).toUri();
@@ -79,6 +89,8 @@ public class CampaignResource {
 		
 		campaignRepository.save(campaign);
 
+		messageSender.sendMessage(Message.Factory.createUpdateMessage(campaignOptional.get(), campaign));
+		
 		return ResponseEntity.noContent().build();
 	}
 	
