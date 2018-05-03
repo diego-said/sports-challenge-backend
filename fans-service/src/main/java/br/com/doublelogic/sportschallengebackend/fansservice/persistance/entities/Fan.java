@@ -27,6 +27,7 @@ public class Fan {
 	
 	private Long idTeam;
 	
+	@Column(columnDefinition = "DATE")
 	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date birthDate;
 	
