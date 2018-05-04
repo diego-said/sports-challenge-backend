@@ -19,3 +19,13 @@ Formas de se evitar:
 *	Pode-se tentar pegar todos os recursos no início do processo, assim caso um dos recursos não esteja disponível você não irá travar os demais
 
 Nós podemos detectar este problema verificando o processo, normalmente um processo em espera fica alocando os recursos, então quantidade de processamento, memória consumida e tempo de execução podem indicar que um processo está travado.
+
+## Stream e ParallelStreams
+
+A Stream representa uma sequência de elementos em que se pode aplicar diversos tipos de operações nesses elementos como: filtrar, ordenar, percorrer, entre outros.
+
+A principal diferença entra uma Stream e uma ParallelStream é que na ParallelStream as operações feitas nos elementos podem ocorrer de forma paralela. Desta forma tem-se uma vantagem no processamento caso hardware possua mais de um processador ou se o processador tem mais de um núcleo.
+
+Você pode utilizar ParallelStream quando as operações feitas em um elemento da sequência não têm influência sobre as operações de outro elemento. Por exemplo, se você quer enviar um mesmo email para diversos destinatários, você pode usar uma ParallelStream. Neste caso como o conteúdo do email é o mesmo não importa em qual ordem os destinatários serão processados.
+Por outro lado, se você quiser analisar o conteúdo de um arquivo é melhor utilizar um Stream. Porque neste caso a ordem do conteúdo dentro do arquivo será importante.
+
