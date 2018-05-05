@@ -1,12 +1,17 @@
 # sports-challenge-backend
 
-Este é um repositório para um teste relasido para o Grupo Netshoes.
+Este é um repositório para um teste para o Grupo Netshoes.
 
 Ele é composto por dois serviços:
 
-* campaign-service
-* fan-service
+* campaign-service: controla todas as informações das campanhas, expondo uma API Rest para CRUD e algumas outras operações.
+* fan-service: controla toas as informações dos fãs em um programa de sócio torcedor, também expõe uma API Rest para CRUD e consume informções do serviço acima.
 
+O desenho da arquitetura do serviço segue abaixo:
+
+![alt text](https://github.com/diego-said/sports-challenge-backend/blob/master/arch_layout.png)
+
+E mais informações podem ser encontradas na pasta ```/src/main/doc``` de cada projeto.
 
 ## Deadlock
 
