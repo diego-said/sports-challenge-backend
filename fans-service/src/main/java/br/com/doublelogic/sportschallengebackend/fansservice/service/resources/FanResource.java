@@ -103,7 +103,7 @@ public class FanResource {
 		Optional<Fan> fanOptional = fanRepository.findById(id);
 
 		if (!fanOptional.isPresent())
-			return ResponseEntity.notFound().build();
+			throw new FanNotFoundException("id-" + id);
 
 		fan.setId(id);
 		
@@ -111,7 +111,7 @@ public class FanResource {
 		
 		fanService.requestAndSaveCampaigns(fan);
 
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok().build();
 	}
 	
 }

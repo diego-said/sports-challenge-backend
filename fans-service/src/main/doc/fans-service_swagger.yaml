@@ -1,0 +1,148 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "1.0.0"
+  title: fans-service
+
+paths:
+  /fans:
+    get:
+      description: |
+        Retorna a lista de fãs com objetos do tipo `Fan`.
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/savedFan'
+    post:
+        description: Adiciona um novo fã
+        parameters:
+          - name: fan
+            in: body
+            description: Fã para ser adicionado
+            required: true
+            schema:
+              $ref: '#/definitions/fan'
+        responses:
+          201:
+            description: Created
+          200:
+            description: OK
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/campaign'
+          403:
+            description: Forbidden
+  /fans/{id}:
+    get:
+      description: Retorna o fã com base no ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do fã
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/savedFan'
+        404:
+          description: Not found
+    delete:
+      description: Remove um fã com base no ID
+      parameters:
+        - name: id
+          in: path
+          description: ID do fã
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Successful response
+        404:
+          description: Not found
+    put:
+      description: Atualiza um fã com base no ID 
+      parameters:
+        - name: id
+          in: path
+          description: ID do fã
+          type: integer
+          required: true
+        - name: fan
+          in: body
+          description: Fã para ser atualizado
+          required: true
+          schema:
+            $ref: '#/definitions/fan'
+      responses:
+        200:
+          description: OK
+        404:
+          description: Not found
+
+definitions:
+  savedFan:
+    type: object
+    required:
+      - id
+      - name
+      - email
+      - idTeam
+      - birthDate
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+      email:
+        type: string  
+      idTeam:
+        type: number
+      birthDate:
+        type: string  
+  fan:
+    type: object
+    required:
+      - name
+      - email
+      - idTeam
+      - birthDate
+    properties:
+      name:
+        type: string
+      email:
+        type: string  
+      idTeam:
+        type: number
+      birthDate:
+        type: string
+  campaign:
+    type: object
+    required:
+      - id
+      - name
+      - idTeam
+      - startDate
+      - finishDate
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+      idTeam:
+        type: number
+      startDate:
+        type: string
+      finishDate:
+        type: string

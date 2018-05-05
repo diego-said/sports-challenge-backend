@@ -1,0 +1,136 @@
+# Example YAML to get you started quickly.
+# Be aware that YAML has indentation based scoping.
+# Code completion support is available so start typing for available options.
+swagger: '2.0'
+
+# This is your document metadata
+info:
+  version: "1.0.0"
+  title: campaign-service
+
+paths:
+  /campaigns:
+    get:
+      description: |
+        Retorna a lista de campanhas com objetos do tipo `Campaign`.
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/savedCampaign'
+    post:
+      description: Adiciona uma nova campanha
+      parameters:
+        - name: campaign
+          in: body
+          description: Campanha para ser adicionada
+          required: true
+          schema:
+            $ref: '#/definitions/campaign'
+      responses:
+        201:
+          description: Created
+    
+  /campaigns/team/{id}:
+    get:
+      description: Retorna a lista de campanhas pelo ID do time
+      parameters:
+        - name: id
+          in: path
+          description: ID do time para recuperar as campanhas
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/savedCampaign'
+  /campaigns/{id}:
+    get:
+      description: Retorna a campanha com base no ID
+      parameters:
+        - name: id
+          in: path
+          description: ID da campanha
+          type: integer
+          required: true
+      responses:
+        200:
+          description: Successful response
+          schema:
+            $ref: '#/definitions/savedCampaign'
+        404:
+          description: Not found
+    delete:
+      description: Remove uma campanha com base no ID
+      parameters:
+        - name: id
+          in: path
+          description: ID da campanha
+          type: integer
+          required: true
+      responses:
+        200:
+          description: OK
+        404:
+          description: Not found
+    put:
+      description: Atualiza uma campanha com base no ID 
+      parameters:
+        - name: id
+          in: path
+          description: ID da campanha
+          type: integer
+          required: true
+        - name: campaign
+          in: body
+          description: Campanha para ser atualizada
+          required: true
+          schema:
+            $ref: '#/definitions/campaign'
+      responses:
+        200:
+          description: OK
+        404:
+          description: Not found
+    
+definitions:
+  savedCampaign:
+    type: object
+    required:
+      - id
+      - name
+      - idTeam
+      - startDate
+      - finishDate
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+      idTeam:
+        type: number
+      startDate:
+        type: string
+      finishDate:
+        type: string  
+  campaign:
+    type: object
+    required:
+      - name
+      - idTeam
+      - startDate
+      - finishDate
+    properties:
+      name:
+        type: string
+      idTeam:
+        type: number
+      startDate:
+        type: string
+      finishDate:
+        type: string  

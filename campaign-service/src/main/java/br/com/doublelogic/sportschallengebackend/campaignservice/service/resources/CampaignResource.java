@@ -91,7 +91,7 @@ public class CampaignResource {
 
 		messageSender.sendMessage(Message.Factory.createUpdateMessage(campaignOptional.get(), campaign));
 		
-		return ResponseEntity.noContent().build();
+		return ResponseEntity.ok().build();
 	}
 	
 }
