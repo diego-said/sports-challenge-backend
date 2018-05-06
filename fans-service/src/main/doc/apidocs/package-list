@@ -1,0 +1,8 @@
+br.com.doublelogic.sportschallengebackend.fansservice
+br.com.doublelogic.sportschallengebackend.fansservice.persistance.entities
+br.com.doublelogic.sportschallengebackend.fansservice.persistance.repositories
+br.com.doublelogic.sportschallengebackend.fansservice.service
+br.com.doublelogic.sportschallengebackend.fansservice.service.errors
+br.com.doublelogic.sportschallengebackend.fansservice.service.message
+br.com.doublelogic.sportschallengebackend.fansservice.service.resources
+br.com.doublelogic.sportschallengebackend.fansservice.service.rest

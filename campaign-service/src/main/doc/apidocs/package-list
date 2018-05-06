@@ -1,0 +1,7 @@
+br.com.doublelogic.sportschallengebackend.campaignservice
+br.com.doublelogic.sportschallengebackend.campaignservice.business
+br.com.doublelogic.sportschallengebackend.campaignservice.persistance.entities
+br.com.doublelogic.sportschallengebackend.campaignservice.persistance.repositories
+br.com.doublelogic.sportschallengebackend.campaignservice.service.errors
+br.com.doublelogic.sportschallengebackend.campaignservice.service.message
+br.com.doublelogic.sportschallengebackend.campaignservice.service.resources
