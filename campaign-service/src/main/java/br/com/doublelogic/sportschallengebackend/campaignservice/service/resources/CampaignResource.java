@@ -22,6 +22,13 @@ import br.com.doublelogic.sportschallengebackend.campaignservice.service.errors.
 import br.com.doublelogic.sportschallengebackend.campaignservice.service.message.Message;
 import br.com.doublelogic.sportschallengebackend.campaignservice.service.message.MessageSender;
 
+/**
+ * 
+ * Componente resposável por expor a API Rest das campanhas
+ * 
+ * @author Diego
+ *
+ */
 @RestController
 public class CampaignResource {
 

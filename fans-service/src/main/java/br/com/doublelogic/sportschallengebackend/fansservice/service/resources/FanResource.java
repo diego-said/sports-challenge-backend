@@ -27,6 +27,13 @@ import br.com.doublelogic.sportschallengebackend.fansservice.service.FanService;
 import br.com.doublelogic.sportschallengebackend.fansservice.service.errors.FanNotFoundException;
 import br.com.doublelogic.sportschallengebackend.fansservice.service.errors.FanSameEmailException;
 
+/**
+ * 
+ * Componente resposável por expor a API Rest dos fãs
+ * 
+ * @author Diego
+ *
+ */
 @RestController
 public class FanResource {
 

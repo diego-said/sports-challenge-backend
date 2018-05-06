@@ -17,11 +17,18 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 
+/**
+ * 
+ * Componente responsável por fazer a requisição a API Rest do serviço de campanhas
+ * 
+ * @author Diego
+ *
+ */
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_SINGLETON)
 public class CampaignRestService {
 
-//	@Value("${sportschallengebackend.campaignservice.api}")
+	//TODO deveria vir do arquivo de config
 	private String campaignApiBaseUrl = "http://localhost:8080/";
 	
 	private final Logger log;

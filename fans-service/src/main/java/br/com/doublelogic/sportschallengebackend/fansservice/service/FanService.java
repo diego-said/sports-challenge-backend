@@ -13,6 +13,13 @@ import br.com.doublelogic.sportschallengebackend.fansservice.persistance.reposit
 import br.com.doublelogic.sportschallengebackend.fansservice.persistance.repositories.FanCampaignRepository;
 import br.com.doublelogic.sportschallengebackend.fansservice.service.rest.CampaignRestService;
 
+/**
+ * 
+ * Componente resposável por consultar o serviço de campanhas e atualizar as informações da base
+ * 
+ * @author Diego
+ *
+ */
 @Service
 public class FanService {
 
@@ -25,6 +32,12 @@ public class FanService {
 	@Autowired
 	private CampaignRestService campaignHttpService;
 
+	/**
+	 * Requisita ao serviço de campanhas todas as campanhas do time de coração de um fã,
+	 * salvando essas informações na base de dados
+	 * @param fan para a consulta das campanhas de seu time
+	 * @return um lista com as informações das campanhas
+	 */
 	public List<Campaign> requestAndSaveCampaigns(Fan fan) {
 		List<Campaign> campaigns = campaignHttpService.listTeamCampaigns(fan.getIdTeam());
 		if(!campaigns.isEmpty()) {

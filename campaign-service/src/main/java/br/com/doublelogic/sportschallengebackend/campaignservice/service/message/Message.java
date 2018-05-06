@@ -1,5 +1,8 @@
 package br.com.doublelogic.sportschallengebackend.campaignservice.service.message;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,6 +19,8 @@ import lombok.Data;
 @Data
 public class Message {
 
+	private Logger log = LoggerFactory.getLogger(getClass());
+	
 	/**
 	 * Tipo de mensagem que será enviada
 	 */
@@ -35,6 +40,13 @@ public class Message {
 	private Message() {
 	}
 	
+	/**
+	 * 
+	 * Factory para a criação das mensagens de remoção e atualização de uma campanha
+	 * 
+	 * @author Diego
+	 *
+	 */
 	public static class Factory {
 		public static Message createDeleteMessage(Campaign deletedCampaign) {
 			Message deleteMessage = new Message();
@@ -52,15 +64,17 @@ public class Message {
 		}
 	}
 	
+	/**
+	 * Converte a mensagem para JSON para ser enviada ao ActiveMQ
+	 * @return uma String com o JSON da mensagem
+	 */
 	public String toJSON() {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			return mapper.writeValueAsString(this);
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return "";
 	}
-	
 }
